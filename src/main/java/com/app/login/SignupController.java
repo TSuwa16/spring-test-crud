@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,7 +48,7 @@ public class SignupController {
 	//データバインド結果の受け取り
 	@PostMapping("/signup")
 	public String postSignUp(
-			@ModelAttribute SignupForm form , 
+			@ModelAttribute @Validated SignupForm form , 
 			BindingResult bindingResult ,
 			Model model) {
 		
