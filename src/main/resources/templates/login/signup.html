@@ -15,7 +15,7 @@
 		<div class="page-header">
 			<h1>ユーザー登録画面</h1>
 		</div>
-		<form th:action="@{/signup}" method="post">
+		<form th:action="@{/signup}" method="post" th:object="${signupForm}">
 			<table class="table table-bordered table-hover">
 			
 				<!-- ユーザーID -->
@@ -23,7 +23,7 @@
 					<th class="active col-sm-3">ユーザーID</th>
 					<td>
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<input type="text" class="form-control" th:field="*{userId}"/>
 						</div>
 					</td>
 				</tr>
@@ -32,7 +32,7 @@
 					<th class="active col-sm-3">パスワード</th>
 					<td>
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<input type="password" class="form-control" th:field="*{password}"/>
 						</div>
 					</td>
 				</tr>
@@ -41,7 +41,7 @@
 					<th class="active col-sm-3">ユーザー名</th>
 					<td>
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<input type="text" class="form-control" th:field="*{userName}"/>
 						</div>
 					</td>
 				</tr>
@@ -50,7 +50,8 @@
 					<th class="active col-sm-3">誕生日</th>
 					<td>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="yyyy/mm/dd"/>
+							<input type="text" class="form-control" 
+								   placeholder="yyyy/mm/dd" th:field="*{birthday}"/>
 						</div>
 					</td>
 				</tr>
@@ -59,7 +60,7 @@
 					<th class="active col-sm-3">年齢</th>
 					<td>
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<input type="text" class="form-control" th:field="*{age}"/>
 						</div>
 					</td>
 				</tr>
@@ -71,12 +72,20 @@
 						<div th:each="item : ${radioMarriage}">
 							<input type="radio" name="radioMarriage" 
 								th:text="${item.key}"
-								th:value="${item.value}" />
+								th:value="${item.value}" 
+								th:field="*{marriage}" />
 						</div>
 					</div>
 					</td>
 				</tr>
 			</table>
+			<!-- エラーメッセージ表示 -->
+			<ul>
+				<li th:each="error : ${#fields.detailedErrors()}">
+					<span th:text="${error.message}">Error message</span>
+				</li>
+			</ul>
+			
 			<!-- ユーザー登録ボタン -->
 			<button class="btn btn-primary" type="submit">ユーザー登録</button>
 		</form>
