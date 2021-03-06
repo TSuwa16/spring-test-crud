@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"></meta>
+	
+	<link th:href="@{webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet" ></link>
+	<script th:src="@{webjars/jquery/1.11.1/jquery.min.js}"></script>
+	<script th:src="@{webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+	
+	<title>SignUp</title>
+</head>
+
+<body class="text-center">
+	<div class="col-sm-5">
+		<div class="page-header">
+			<h1>ユーザー登録画面</h1>
+		</div>
+		<form th:action="@{/signup}" method="post">
+			<table class="table table-bordered table-hover">
+			
+				<!-- ユーザーID -->
+				<tr>
+					<th class="active col-sm-3">ユーザーID</th>
+					<td>
+						<div class="form-group">
+							<input type="text" class="form-control" />
+						</div>
+					</td>
+				</tr>
+				<!-- パスワード -->
+				<tr>
+					<th class="active col-sm-3">パスワード</th>
+					<td>
+						<div class="form-group">
+							<input type="text" class="form-control" />
+						</div>
+					</td>
+				</tr>
+				<!-- ユーザー名 -->
+				<tr>
+					<th class="active col-sm-3">ユーザー名</th>
+					<td>
+						<div class="form-group">
+							<input type="text" class="form-control" />
+						</div>
+					</td>
+				</tr>
+				<!-- 誕生日 -->
+				<tr>
+					<th class="active col-sm-3">誕生日</th>
+					<td>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="yyyy/mm/dd"/>
+						</div>
+					</td>
+				</tr>
+				<!-- 年齢 -->
+				<tr>
+					<th class="active col-sm-3">年齢</th>
+					<td>
+						<div class="form-group">
+							<input type="text" class="form-control" />
+						</div>
+					</td>
+				</tr>
+				<!-- 結婚 -->
+				<tr>
+					<th class="active col-sm-3">結婚</th>
+					<td>
+					<div class="form-group">								
+						<div th:each="item : ${radioMarriage}">
+							<input type="radio" name="radioMarriage" 
+								th:text="${item.key}"
+								th:value="${item.value}" />
+						</div>
+					</div>
+					</td>
+				</tr>
+			</table>
+			<!-- ユーザー登録ボタン -->
+			<button class="btn btn-primary" type="submit">ユーザー登録</button>
+		</form>
+	</div>
+</body>
+</html>
