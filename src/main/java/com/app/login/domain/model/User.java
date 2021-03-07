@@ -12,7 +12,7 @@ public class User {
 	private String userName;
 	private Date birthday;
 	private int age;
-	private boolean mariiage;
+	private boolean marriage;
 	private String role;
 	
 }
