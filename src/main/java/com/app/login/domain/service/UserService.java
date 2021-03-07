@@ -1,5 +1,7 @@
 package com.app.login.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,15 @@ public class UserService {
 		
 		return result;
 		
+	}
+	
+	//count
+	public int count() {
+		return dao.count();
+	}
+	
+	//select All
+	public List<User> selectMany(){
+		return dao.selectMany();
 	}
 }
