@@ -72,7 +72,8 @@ public class SignupController {
 		user.setUserId(form.getUserId());
 		user.setPassword(form.getPassword());
 		user.setUserName(form.getUserName());
-		user.setAge(form.getAge());;
+		user.setAge(form.getAge());
+		user.setBirthday(form.getBirthday());
 		user.setMarriage(form.isMarriage());
 		user.setRole("ROLE_GENERAL");
 		

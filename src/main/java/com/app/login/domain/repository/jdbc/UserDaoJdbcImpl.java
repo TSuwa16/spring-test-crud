@@ -53,10 +53,27 @@ public class UserDaoJdbcImpl implements UserDao{
 		return rowNumber;
 	}
 	
+	//Userテーブルからデータを1件取得
 	@Override
 	public User selectOne(String userId) throws DataAccessException {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		
+		Map<String,Object> map = jdbc.queryForMap(
+				"SELECT * FROM m_user "
+				+ "WHERE user_id = ?"
+				,userId);
+		
+		User user = new User();
+		
+		user.setUserId((String)map.get("user_id"));
+		user.setPassword((String)map.get("password"));
+		user.setUserName((String)map.get("user_name"));
+		user.setBirthday((Date)map.get("birthday"));
+		user.setAge((int)map.get("age"));
+		user.setMarriage((Boolean)map.get("marriage"));
+		user.setRole((String)map.get("role"));
+		
+		
+		return user;
 	}
 	
 	//Userテーブル全件を取得
@@ -88,10 +105,26 @@ public class UserDaoJdbcImpl implements UserDao{
 		return userList;
 	}
 	
+	//1件更新
 	@Override
 	public int updateOne(User user) throws DataAccessException {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
+		
+		int rowNumber = jdbc.update("UPDATE M_USER "
+				+ "SET "
+				+ "password = ?,"
+				+ "user_name = ?,"
+				+ "birthday = ?,"
+				+ "age = ?,"
+				+ "marriage = ?"
+				+ "WHERE user_id = ?"
+				, user.getPassword()
+				, user.getUserName()
+				, user.getBirthday()
+				, user.getAge()
+				, user.isMarriage()
+				, user.getUserId());
+		
+		return rowNumber;
 	}
 	
 	@Override

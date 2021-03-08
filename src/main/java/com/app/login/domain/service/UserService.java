@@ -32,13 +32,33 @@ public class UserService {
 		
 	}
 	
-	//count
+	//件数取得
 	public int count() {
 		return dao.count();
 	}
 	
-	//select All
+	//全件取得
 	public List<User> selectMany(){
 		return dao.selectMany();
 	}
+	
+	//1件取得
+	public User selectOne(String userId) {
+		return dao.selectOne(userId);
+	}
+	
+	//1件更新
+	public boolean updateOne(User user) {
+		
+		int rowNumber = dao.updateOne(user);
+		
+		boolean result = false ;
+		
+		if(rowNumber > 0 ) {
+			return true;
+		}
+		
+		return result;
+	}
+	
 }
