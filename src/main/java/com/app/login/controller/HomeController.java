@@ -147,5 +147,26 @@ public class HomeController {
 		
 		return getUserList(model);
 	}
+	
+	//ユーザー削除処理
+	@PostMapping(value="/userDetail" , params = "delete")
+	public String postUserDetailDelete(
+			@ModelAttribute SignupForm form ,
+			Model model) {
+		
+		//debug
+		System.out.println("削除ボタンの処理");
+		
+		//削除実行
+		boolean result = userService.deleteOne(form.getUserId());
+		
+		if(result == true) {
+			model.addAttribute("result" , "削除成功");
+		}else {
+			model.addAttribute("result" , "削除失敗");
+		}
+		
+		return getUserList(model);
+	}
 
 }
