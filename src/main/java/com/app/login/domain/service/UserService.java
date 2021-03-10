@@ -3,6 +3,7 @@ package com.app.login.domain.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.app.login.domain.model.User;
@@ -10,8 +11,9 @@ import com.app.login.domain.repository.UserDao;
 
 @Service
 public class UserService {
-
+	
 	@Autowired
+	@Qualifier("UserDaoNamedJdbcImpl")
 	UserDao dao;
 	
 	//insert
