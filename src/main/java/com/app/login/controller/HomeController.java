@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,15 +75,6 @@ public class HomeController {
 	public String postLogout() {
 		
 		return "redirect:/login";
-	}
-	
-	//ユーザー一覧CSV出力
-	@GetMapping("/userList/csv")
-	public String getUserListCsv(Model model) {
-		
-		//TODO CSV出力処理
-		return getUserList(model);
-		
 	}
 	
 	//ユーザ詳細画面表示
@@ -167,6 +161,28 @@ public class HomeController {
 		}
 		
 		return getUserList(model);
+	}
+	
+	@GetMapping("/userList/csv")
+	public ResponseEntity<byte[]> getUserListCsv(Model model){
+		
+		userService.userCsvOut();
+		
+		byte[] bytes = null;		
+		
+		try {		
+
+			bytes = userService.getFile("sample.csv");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type","text/csv; charset=UTF-8");
+		header.setContentDispositionFormData("filename", "sample.csv");
+		
+		return new ResponseEntity<>(bytes , header , HttpStatus.OK);
 	}
 
 }
